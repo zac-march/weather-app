@@ -1,0 +1,77 @@
+/* latin */
+@font-face {
+  font-family: "Fredoka One";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/fredokaone/v14/k3kUo8kEI-tA1RRcTZGmTlHGCac.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+:root {
+  --font-color: rgb(0, 0, 0);
+  --background-colour: #eee;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Fredoka One";
+  background-color: var(--background-colour);
+  color: var(--font-color);
+  display: flex;
+  flex-direction: column;
+}
+
+header,
+footer,
+main {
+  padding: 30px 25% 30px 25%;
+}
+
+main {
+  flex-grow: 1;
+}
+
+/* Footer */
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.705);
+}
+
+.fa-github {
+  font-size: 1.5rem;
+  transition: transform 0.2s ease-in-out;
+  color: rgba(0, 0, 0, 0.705);
+}
+
+footer > a:hover > i {
+  transform: rotate(-2deg) scale(1.1);
+}
