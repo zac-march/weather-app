@@ -9,11 +9,28 @@ export async function getWeatherData(searchQuery) {
     const humidity = weatherData.main.humidity;
     const windSpeed = weatherData.wind.speed;
     const cloudCover = weatherData.clouds.all;
+    const conditionDescription = weatherData.weather[0].description;
     let isRain = false;
     if (weatherData.weather[0].id <= 781) {
       isRain = true;
     }
-    return { humidity, temp, windSpeed, isRain, cloudCover };
+    console.log(weatherData);
+    console.log({
+      humidity,
+      temp,
+      windSpeed,
+      isRain,
+      cloudCover,
+      conditionDescription,
+    });
+    return {
+      humidity,
+      temp,
+      windSpeed,
+      isRain,
+      cloudCover,
+      conditionDescription,
+    };
   } catch (err) {
     console.log(err);
   }
