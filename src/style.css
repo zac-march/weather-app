@@ -55,6 +55,9 @@ main h3 {
 .results-container {
   display: grid;
   grid-auto-flow: column;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
 }
 
 .weather-container {
@@ -78,10 +81,19 @@ main h3 {
   padding: 2.5rem 3rem;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .beach-score-container > * {
   color: #ffffff;
+  font-weight: bold;
+}
+
+.beach-score-container img {
+  width: 200;
+  height: 200;
 }
 
 .search {
@@ -104,9 +116,16 @@ main h3 {
   font-family: "dosis";
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: #f0c27d;
+  background-color: #69a498;
   padding: 10px;
   border: 1px solid #7cb9e8;
+  text-decoration: none;
+  text-align: center;
+}
+
+.search button:active {
+  background-color: #548379;
+  border: 1px solid #2c4e5f;
 }
 
 /* Footer */

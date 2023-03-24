@@ -1,3 +1,5 @@
+import { DataInjecter } from "./DataInjecter";
+
 export function MainUIController() {
   const main = document.querySelector("main");
 
@@ -7,12 +9,20 @@ export function MainUIController() {
   function renderSearch() {
     const searchContainer = document.createElement("div");
     searchContainer.classList.add("search");
-
-    searchContainer.innerHTML = `
-  <input />
-  <button>Beach day?</button>
-  `;
     main.append(searchContainer);
+
+    const searchInput = document.createElement("input");
+    const searchButton = document.createElement("button");
+    searchButton.textContent = "Beach day?";
+    searchButton.addEventListener("click", () => {
+      const searchQuery = searchInput.value;
+      if (searchQuery == "") {
+        return;
+      }
+      DataInjecter(searchQuery);
+      searchInput.value = "";
+    });
+    searchContainer.append(searchInput, searchButton);
   }
 
   function renderSearchResults() {
@@ -29,12 +39,12 @@ export function MainUIController() {
       searchResultsContainer.appendChild(weatherContainer);
       weatherContainer.innerHTML = `
     <div>
-          <h1>Melbourne</h1>
-          <h2>9.25 C</h2>
+          <h1 id="weather-header"></h1>
+          <h2 id="weather-temp"></h2>
           <div class="weather-details">
-            <h3>Scattered showers</h3>
-            <h3>Humidity: 83%</h3>
-            <h3>Wind: 12kmh</h3>
+            <h3 id="weather-description"></h3>
+            <h3 id="weather-humidity"></h3>
+            <h3 id="weather-wind"></h3>
           </div>
     `;
     }
@@ -43,7 +53,7 @@ export function MainUIController() {
       beachScoreContainer.classList.add("beach-score-container");
       searchResultsContainer.appendChild(beachScoreContainer);
       beachScoreContainer.innerHTML = `
-    <h3>its a great day to go to the beach</h3>
+    <h3 id="beach-rating-message"></h3>
     <img src="https://picsum.photos/200/200/" alt="a gif" />
     `;
     }
