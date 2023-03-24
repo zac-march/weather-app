@@ -1,9 +1,8 @@
+import { getGif } from "../data_components/getGif";
 import { getWeatherData } from "../data_components/getWeatherData";
 
 async function DataInjecter(searchQuery) {
   const weatherData = await getWeatherData(searchQuery);
-  console.log(weatherData);
-
   renderWeatherData();
   renderBeachRating();
 
@@ -24,9 +23,22 @@ async function DataInjecter(searchQuery) {
     windElement.textContent = `Wind speed: ${weatherData.windSpeed} km/h`;
   }
 
-  function renderBeachRating() {
+  async function renderBeachRating() {
     const beachRatingElement = document.querySelector("#beach-rating-message");
+    const beachRating = getBeachRating();
     beachRatingElement.textContent = `Today is a ${getBeachRating()} day to go to the beach.`;
+    const beachRatingImage = document.querySelector(
+      ".beach-score-container img"
+    );
+    let gifSearchTerm;
+    if (beachRating == "bad") {
+      gifSearchTerm = "sad dog";
+    } else {
+      gifSearchTerm = "dog beach";
+    }
+
+    const gifData = await getGif(gifSearchTerm);
+    beachRatingImage.src = gifData.url;
   }
 
   function getBeachRating() {
