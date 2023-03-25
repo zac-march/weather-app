@@ -1,6 +1,6 @@
 async function getGif(searchTerm) {
   const apiKey = "AIzaSyAbjBP2DJwiM-Xz4cAp1-Nznijstg2n_GY";
-  const limit = 50;
+  const limit = 20;
   const searchUrl =
     "https://tenor.googleapis.com/v2/search?q=" +
     searchTerm +

@@ -11,18 +11,48 @@ export function MainUIController() {
     searchContainer.classList.add("search");
     main.append(searchContainer);
 
-    const searchInput = document.createElement("input");
-    const searchButton = document.createElement("button");
-    searchButton.textContent = "Beach day?";
-    searchButton.addEventListener("click", () => {
-      const searchQuery = searchInput.value;
-      if (searchQuery == "") {
-        return;
-      }
-      DataInjecter(searchQuery);
-      searchInput.value = "";
-    });
-    searchContainer.append(searchInput, searchButton);
+    const searchInput = createSearchInput();
+    const searchButton = createSearchButton();
+    const errorContainer = createErrorContainer();
+
+    searchContainer.append(searchInput, searchButton, errorContainer);
+
+    function createErrorContainer() {
+      const errorContainer = document.createElement("div");
+      const errorMessage = document.createElement("small");
+      errorContainer.classList.add("search-error-container");
+      errorMessage.id = "search-error-message";
+      errorContainer.append(errorMessage);
+      return errorContainer;
+    }
+
+    function createSearchButton() {
+      const searchButton = document.createElement("button");
+      searchButton.textContent = "Beach day?";
+
+      searchButton.addEventListener("click", () => {
+        const searchTerm = searchInput.value;
+        if (searchTerm == "") {
+          searchInput.style.outline = "1px solid red";
+          return;
+        }
+        DataInjecter(searchTerm);
+        searchInput.value = "";
+      });
+      return searchButton;
+    }
+
+    function createSearchInput() {
+      const searchInput = document.createElement("input");
+      searchInput.placeholder = "Melbourne, AU";
+
+      searchInput.addEventListener("click", () => {
+        const errorMessage = document.querySelector("#search-error-message");
+        errorMessage.textContent = "";
+        searchInput.style.removeProperty("outline");
+      });
+      return searchInput;
+    }
   }
 
   function renderSearchResults() {
@@ -54,7 +84,7 @@ export function MainUIController() {
       searchResultsContainer.appendChild(beachScoreContainer);
       beachScoreContainer.innerHTML = `
     <h3 id="beach-rating-message"></h3>
-    <img src="https://picsum.photos/200/200/" alt="a gif" />
+    <img alt="a gif" />
     `;
     }
   }

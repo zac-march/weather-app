@@ -3,6 +3,11 @@ import { getWeatherData } from "../data_components/getWeatherData";
 
 async function DataInjecter(searchQuery) {
   const weatherData = await getWeatherData(searchQuery);
+  if (!weatherData.callStatus) {
+    renderCallFailed(weatherData.callMessage);
+    return;
+  }
+
   renderWeatherData();
   renderBeachRating();
 
@@ -26,7 +31,7 @@ async function DataInjecter(searchQuery) {
   async function renderBeachRating() {
     const beachRatingElement = document.querySelector("#beach-rating-message");
     const beachRating = getBeachRating();
-    beachRatingElement.textContent = `Today is a ${getBeachRating()} day to go to the beach.`;
+    beachRatingElement.textContent = `Today is a ${beachRating} day to swim at the beach.`;
     const beachRatingImage = document.querySelector(
       ".beach-score-container img"
     );
@@ -58,6 +63,11 @@ async function DataInjecter(searchQuery) {
     } else {
       return "good";
     }
+  }
+
+  function renderCallFailed(message) {
+    const errorMessage = document.querySelector("#search-error-message");
+    errorMessage.textContent = message;
   }
 }
 
